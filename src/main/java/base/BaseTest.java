@@ -58,7 +58,7 @@ public class BaseTest {
     }
 
     @BeforeMethod
-   // @Parameters("browser")
+    // @Parameters("browser")
     public void initialiseDriver(Method testMethod) {
         logger = extentReports.createTest(testMethod.getName());
         setupDriver(properties.getProperty("browser"));
@@ -111,7 +111,7 @@ public class BaseTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        System.out.println("prop : "+ properties.getProperty("browser"));
+        System.out.println("prop : " + properties.getProperty("browser"));
     }
 
 }

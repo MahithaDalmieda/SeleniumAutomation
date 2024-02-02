@@ -1,27 +1,40 @@
 package pageEvents;
 
 import base.BaseTest;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import pageObjects.LoginPageElements;
 import utils.ElementFetch;
 
 public class LoginPageEvents extends BaseTest {
 
-    ElementFetch element = new ElementFetch();
+    @FindBy(xpath = "//input[@placeholder='Email']")
+    WebElement email;
+
+    @FindBy(xpath = "//input[@placeholder='Password']")
+    WebElement password;
+
+    @FindBy(xpath = "//div[@class='ui fluid large blue submit button']")
+    WebElement loginButton;
+
+    public LoginPageEvents() {
+        PageFactory.initElements(driver, this);
+    }
 
     public LoginPageEvents verifyIfLoginPageIsLoaded() {
-        Assert.assertTrue(element.getWebElement("XPATH", LoginPageElements.LoginButton).isDisplayed(), "Element not found");
+        Assert.assertTrue(loginButton.isDisplayed(), "Element not found");
         return this;
     }
 
     public LoginPageEvents enterUserName(String email) {
         //logger.info("Enter user name");
-        element.getWebElement("XPATH", LoginPageElements.Email).sendKeys(email);
+        this.email.sendKeys(email);
         return this;
     }
 
     public LoginPageEvents enterPassword(String password) {
-        element.getWebElement("XPATH", LoginPageElements.Password).sendKeys(password);
+        this.password.sendKeys(password);
         return this;
     }
 
@@ -30,6 +43,6 @@ public class LoginPageEvents extends BaseTest {
     }
 
     public void clickOnLogin() {
-        element.getWebElement("XPATH", LoginPageElements.LoginButton).click();
+        loginButton.click();
     }
 }
